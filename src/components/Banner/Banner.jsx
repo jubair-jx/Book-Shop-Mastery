@@ -5,6 +5,7 @@ import { useGetAllBooksQuery } from "../../featured/apiSlice";
 
 const Banner = () => {
   const { data: books, isError, isLoading, error } = useGetAllBooksQuery();
+
   let content;
   if (isLoading) content = <h1>Loading.......</h1>;
   if (!isLoading && isError) content = <h1>{error}</h1>;

@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Banner />}></Route>
           <Route path="/addBook" element={<AddBook />}></Route>
-          <Route path="/editBook" element={<EditPage />}></Route>
+          <Route path="/editBook/:bookId" element={<EditPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>

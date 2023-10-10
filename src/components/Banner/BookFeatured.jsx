@@ -1,15 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterBooks, setFilter } from "../../featured/bookSlice";
 
 const BookFeatured = () => {
-  const { jobs } = useSelector((state) => state.bookReducer);
-  // console.log(jobs);
+  const { books } = useSelector((state) => state.bookReducer);
+
   const dispatch = useDispatch();
-  const handleFeaturedBooks = (filter) => {
-    dispatch(setFilter(filter));
-    dispatch(filterBooks(filter));
-  };
+  const handleFeaturedBooks = (filter) => {};
   return (
     <div class="flex items-center space-x-4">
       <button

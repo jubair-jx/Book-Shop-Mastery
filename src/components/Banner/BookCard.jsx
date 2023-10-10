@@ -1,8 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useDeleteBookMutation } from "../../featured/apiSlice";
 
 const BookCard = ({ book }) => {
   const { name, author, thumbnail, price, rating, featured, id } = book;
+  const [deleteBook, { isError, isLoading, isSuccess, error }] =
+    useDeleteBookMutation();
+  const handleDelete = (id) => {
+    deleteBook(id);
+  };
   return (
     <div class="book-card">
       <img
@@ -14,7 +20,7 @@ const BookCard = ({ book }) => {
         <div class="flex items-center justify-between">
           {featured && <span class="lws-badge">featured</span>}
           <div class="text-gray-500 flex space-x-2">
-            <Link to={"/editBook"} class="lws-edit ">
+            <Link to={`/editBook/${id}`} class="lws-edit ">
               <svg
                 fill="none"
                 viewBox="0 0 24 24"
@@ -29,7 +35,7 @@ const BookCard = ({ book }) => {
                 />
               </svg>
             </Link>
-            <button class="lws-deleteBook">
+            <button onClick={() => deleteBook(id)} class="lws-deleteBook">
               <svg
                 fill="none"
                 viewBox="0 0 24 24"

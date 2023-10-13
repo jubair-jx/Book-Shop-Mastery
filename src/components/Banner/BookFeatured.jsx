@@ -1,20 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const BookFeatured = () => {
-  const { books } = useSelector((state) => state.bookReducer);
+  const [filter, setFilter] = useState(false);
 
+  const { books } = useSelector((state) => state.bookReducer);
   const dispatch = useDispatch();
-  const handleFeaturedBooks = (filter) => {};
+  useEffect(() => {
+    dispatch(updateFilters({ filter }));
+  }, [filter, dispatch]);
+
   return (
     <div class="flex items-center space-x-4">
       <button
-        onClick={() => handleFeaturedBooks(false)}
+        onClick={() => setFilter(false)}
         class="lws-filter-btn active-filter"
       >
         All
       </button>
-      <button onClick={() => handleFeaturedBooks(true)} class="lws-filter-btn">
+      <button onClick={() => setFilter(true)} class="lws-filter-btn">
         Featured
       </button>
     </div>

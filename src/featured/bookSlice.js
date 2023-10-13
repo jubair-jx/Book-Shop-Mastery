@@ -3,13 +3,20 @@ import { useGetAllBooksQuery } from "./apiSlice";
 
 const initialState = {
   search: "",
-  filter: "",
+  featured: false,
 };
 
 const bookSlice = createSlice({
   name: "books",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleFeaturedFilter: (state, action) => {
+      state.featured = action.payload;
+    },
+    searchFilter: (state, action) => {
+      state.search = action.payload;
+    },
+  },
 });
 export default bookSlice.reducer;
-export const {} = bookSlice.actions;
+export const { toggleFeaturedFilter, searchFilter } = bookSlice.actions;

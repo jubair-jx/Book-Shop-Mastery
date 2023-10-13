@@ -11,12 +11,12 @@ export const apiSlice = createApi({
     getAllBooks: builder.query({
       query: () => "/books",
       providesTags: ["books"],
+      keepUnusedDataFor: 200,
     }),
 
     singleBook: builder.query({
       query: (id) => `/books/${id}`,
-
-      providesTags: ["books"],
+      providesTags: (result, error, args) => [{ type: "video", id: args }],
     }),
     addBook: builder.mutation({
       query: (data) => ({
@@ -39,7 +39,11 @@ export const apiSlice = createApi({
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["books"],
+      invalidatesTags: (result, error, args) => [
+        "Videos",
+        { type: "video", id: args.id },
+        { type: "Relatedvideos", id: args.id },
+      ],
     }),
   }),
 });
